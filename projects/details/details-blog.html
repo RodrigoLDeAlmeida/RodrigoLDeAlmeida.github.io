@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Projeto | Blog App</title>
+
+    <!-- Fonte Inter do Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===============================
+         Reset e Base
+      =============================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f4f7fa;
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      /* ===============================
+         Cabeçalho
+      =============================== */
+      header {
+        background-color: #1e88e5;
+        color: #fff;
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      /* ===============================
+         Layout de Cartões
+      =============================== */
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        flex: 1;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card h2 {
+        font-size: 1.4rem;
+        color: #1e88e5;
+        margin-bottom: 1rem;
+      }
+
+      .card img {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        object-fit: cover;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+        color: #555;
+      }
+
+      /* ===============================
+         Modal de Imagem Ampliada
+      =============================== */
+      #modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      #modal img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+      }
+
+      #modal .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      /* ===============================
+         Rodapé
+      =============================== */
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #eee;
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: auto; /* Faz com que o footer fique no final da página */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Cabeçalho -->
+    <header>
+      <h1>Detalhes do Projeto - Blog App</h1>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+      <!-- Cartões com informações sobre as funcionalidades do app -->
+      <section class="card">
+        <h2>Login</h2>
+        <img
+          src="../../img/blog/login.png"
+          alt="Tela de login do Blog App"
+          class="clickable-image"
+        />
+        <p>Login simples com autenticação usando bcrypt na senha.</p>
+      </section>
+
+      <section class="card">
+        <h2>Menu</h2>
+        <img
+          src="../../img/blog/menu.png"
+          alt="Menu principal do Blog App"
+          class="clickable-image"
+        />
+        <p>Funcionalidade CRUD para gerenciar posts no blog.</p>
+      </section>
+
+      <section class="card">
+        <h2>Edição</h2>
+        <img
+          src="../../img/blog/edit.png"
+          alt="Tela de edição de post"
+          class="clickable-image"
+        />
+        <p>Interface para editar posts existentes.</p>
+      </section>
+
+      <section class="card">
+        <h2>Postar</h2>
+        <img
+          src="../../img/blog/post.png"
+          alt="Tela de criação de post"
+          class="clickable-image"
+        />
+        <p>Criação de novos posts para o blog.</p>
+      </section>
+    </main>
+
+    <!-- Modal de Imagem -->
+    <div id="modal">
+      <span class="close" title="Fechar modal">&times;</span>
+      <img id="modal-image" src="" alt="Imagem ampliada" />
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+      <p>&copy; 2025 Blog App. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script para Modal -->
+    <script>
+      // Seleciona todas as imagens com a classe 'clickable-image'
+      const images = document.querySelectorAll(".clickable-image");
+      const modal = document.getElementById("modal");
+      const modalImage = document.getElementById("modal-image");
+      const closeModal = document.querySelector(".close");
+
+      // Função para abrir o modal com a imagem
+      images.forEach((image) => {
+        image.addEventListener("click", function () {
+          modal.style.display = "flex";
+          modalImage.src = this.src; // Define o src da imagem no modal
+          modalImage.alt = this.alt; // Define o alt da imagem no modal
+        });
+      });
+
+      // Função para fechar o modal
+      closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+      });
+
+      // Fecha o modal clicando fora da imagem
+      window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
